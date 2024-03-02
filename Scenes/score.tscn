@@ -1,0 +1,32 @@
+[gd_scene load_steps=4 format=3 uid="uid://bq0om0c7cajw3"]
+
+[ext_resource type="Script" path="res://Scenes/score.gd" id="1_a72lq"]
+
+[sub_resource type="SystemFont" id="SystemFont_etin6"]
+font_names = PackedStringArray("Classic Console Neue")
+
+[sub_resource type="SystemFont" id="SystemFont_j7k06"]
+font_names = PackedStringArray("Classic Console Neue")
+
+[node name="Score" type="CanvasLayer"]
+script = ExtResource("1_a72lq")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Score" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = SubResource("SystemFont_etin6")
+theme_override_font_sizes/font_size = 75
+text = "Score:"
+
+[node name="Time" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = SubResource("SystemFont_j7k06")
+theme_override_font_sizes/font_size = 50
+text = "Time:"
+
+[node name="Timer" type="Timer" parent="VBoxContainer"]
+
+[connection signal="timeout" from="VBoxContainer/Timer" to="." method="_on_timer_timeout"]

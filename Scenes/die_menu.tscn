@@ -1,0 +1,66 @@
+[gd_scene load_steps=5 format=3 uid="uid://dbpcin5hgf6l4"]
+
+[ext_resource type="Script" path="res://Scenes/die_menu.gd" id="1_1pnlv"]
+[ext_resource type="Texture2D" uid="uid://b0l56smwluwnb" path="res://Sprites/Background/Background.png" id="1_k3o0w"]
+
+[sub_resource type="SystemFont" id="SystemFont_h8xhi"]
+font_names = PackedStringArray("Classic Console Neue")
+
+[sub_resource type="SystemFont" id="SystemFont_ofix3"]
+font_names = PackedStringArray("Classic Console Neue")
+
+[node name="DieMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_1pnlv")
+game_scene = "res://Scenes/map.tscn"
+
+[node name="Background" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("1_k3o0w")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 35
+theme_override_constants/margin_top = 50
+theme_override_constants/margin_right = 35
+theme_override_constants/margin_bottom = 50
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/HBoxContainer"]
+custom_minimum_size = Vector2(600, 0)
+layout_mode = 2
+size_flags_horizontal = 6
+size_flags_vertical = 4
+
+[node name="Label" type="Label" parent="MarginContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = SubResource("SystemFont_h8xhi")
+theme_override_font_sizes/font_size = 125
+text = "You die"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="StartGame" type="Button" parent="MarginContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = SubResource("SystemFont_ofix3")
+theme_override_font_sizes/font_size = 125
+text = "Restart game"
+
+[connection signal="pressed" from="MarginContainer/HBoxContainer/VBoxContainer/StartGame" to="." method="_on_start_game_pressed"]

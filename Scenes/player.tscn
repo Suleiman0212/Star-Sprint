@@ -1,0 +1,41 @@
+[gd_scene load_steps=6 format=3 uid="uid://cxw6dc5wt24x4"]
+
+[ext_resource type="Texture2D" uid="uid://fxblax4orlt8" path="res://Sprites/Player/Player.png" id="1_8t5jy"]
+[ext_resource type="Script" path="res://Scenes/player.gd" id="1_ileqs"]
+[ext_resource type="PackedScene" uid="uid://begh314braqn8" path="res://Scenes/bullet_scene.tscn" id="2_xx8t3"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_ud2w2"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_8t5jy")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_6rlhe"]
+size = Vector2(8, 8)
+
+[node name="Player" type="CharacterBody2D"]
+scale = Vector2(10, 10)
+collision_layer = 0
+collision_mask = 0
+script = ExtResource("1_ileqs")
+bullet_scene = ExtResource("2_xx8t3")
+die_scene = "res://Scenes/die_menu.tscn"
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_ud2w2")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_6rlhe")
+
+[node name="Marker2D" type="Marker2D" parent="."]
+position = Vector2(0, -5.6)
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 0.5
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
