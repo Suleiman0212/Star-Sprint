@@ -1,9 +1,10 @@
-[gd_scene load_steps=21 format=3 uid="uid://bv68ccbwb11gm"]
+[gd_scene load_steps=22 format=3 uid="uid://bv68ccbwb11gm"]
 
 [ext_resource type="Texture2D" uid="uid://dm5fjsaq1x30b" path="res://Sprites/Enemies/Enemy1.png" id="1_b4voc"]
 [ext_resource type="Script" path="res://Scenes/enemy.gd" id="1_kxdyi"]
 [ext_resource type="Texture2D" uid="uid://da34757jepat0" path="res://Sprites/Blast/Die1-Sheet.png" id="2_wmxbd"]
 [ext_resource type="PackedScene" uid="uid://duhnarvm8hla0" path="res://Scenes/enemy_bullet_scene.tscn" id="2_x6bq8"]
+[ext_resource type="PackedScene" uid="uid://bnni30we7u80u" path="res://Scenes/repair_kit.tscn" id="3_7qt7h"]
 [ext_resource type="Texture2D" uid="uid://c7cyemsc1c1n2" path="res://Sprites/Blast/Die2-Sheet.png" id="3_bxhia"]
 [ext_resource type="Texture2D" uid="uid://c31phxm7n6c6b" path="res://Sprites/Enemies/Enemy2.png" id="4_cjswa"]
 [ext_resource type="Texture2D" uid="uid://lt6e2p67ps4y" path="res://Sprites/Enemies/Enemy3.png" id="6_qbjsd"]
@@ -127,6 +128,7 @@ collision_layer = 0
 collision_mask = 0
 script = ExtResource("1_kxdyi")
 bullet_scene = ExtResource("2_x6bq8")
+repair_kit = ExtResource("3_7qt7h")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(-0.4, -0.4)

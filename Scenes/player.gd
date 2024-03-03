@@ -89,6 +89,11 @@ func hurt():
 			change_state(PlayerStates.Die)
 		else:
 			change_state(PlayerStates.Hurt)
+			
+func health():
+	if LIVES < 3:
+		LIVES += 1
+		score.lives_update(LIVES)
 
 func die():
 	change_state(PlayerStates.Die)

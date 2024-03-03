@@ -2,9 +2,10 @@ extends CharacterBody2D
 
 @onready var anim: AnimatedSprite2D = $AnimatedSprite2D
 @onready var marker: Marker2D = $Marker2D
-@export var bullet_scene: PackedScene
 @onready var timer: Timer = $Timer
 
+@export var bullet_scene: PackedScene
+@export var repair_kit: PackedScene
 @export var SPEED = 100.0
 var random
 var enemy_type
@@ -57,6 +58,10 @@ func die():
 
 
 func _on_animation_finished() -> void:
+	if random.randi_range(1, 20) == random.randi_range(1, 20):
+		var rep_kit = repair_kit.instantiate()
+		get_tree().root.add_child(rep_kit)
+		rep_kit.position = global_position
 	queue_free()
 
 

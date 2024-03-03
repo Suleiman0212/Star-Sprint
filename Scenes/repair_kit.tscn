@@ -1,0 +1,34 @@
+[gd_scene load_steps=5 format=3 uid="uid://bnni30we7u80u"]
+
+[ext_resource type="Script" path="res://Scenes/repair_kit.gd" id="1_0kfcj"]
+[ext_resource type="Texture2D" uid="uid://d2d8pvcksside" path="res://Sprites/RepKit/RepairKit.png" id="1_btnt7"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_errxd"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_btnt7")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_wbnf0"]
+size = Vector2(14, 14)
+
+[node name="RepairKit" type="Node2D"]
+scale = Vector2(6, 6)
+script = ExtResource("1_0kfcj")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_errxd")
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_layer = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(7.94729e-08, -1.58946e-07)
+shape = SubResource("RectangleShape2D_wbnf0")
+
+[connection signal="area_entered" from="Area2D" to="." method="_on_area_entered"]
