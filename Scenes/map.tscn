@@ -1,16 +1,13 @@
 [gd_scene load_steps=5 format=3 uid="uid://da2jsi1fsppkn"]
 
-[ext_resource type="Texture2D" uid="uid://b0l56smwluwnb" path="res://Sprites/Background/Background.png" id="1_spaya"]
 [ext_resource type="PackedScene" uid="uid://cxw6dc5wt24x4" path="res://Scenes/player.tscn" id="2_nbt12"]
 [ext_resource type="PackedScene" uid="uid://bssnawospo0a1" path="res://Scenes/enemy_spawner.tscn" id="3_0pydx"]
+[ext_resource type="PackedScene" uid="uid://5bl5s370xbpp" path="res://Scenes/parallax_background.tscn" id="4_66462"]
 [ext_resource type="PackedScene" uid="uid://bq0om0c7cajw3" path="res://Scenes/score.tscn" id="4_fl80y"]
 
 [node name="Map" type="Node2D"]
 
-[node name="Background" type="TextureRect" parent="."]
-offset_right = 1920.0
-offset_bottom = 1080.0
-texture = ExtResource("1_spaya")
+[node name="ParallaxBackground" parent="." instance=ExtResource("4_66462")]
 
 [node name="Player" parent="." instance=ExtResource("2_nbt12")]
 position = Vector2(960, 984)

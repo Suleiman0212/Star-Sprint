@@ -1,0 +1,35 @@
+[gd_scene load_steps=5 format=3 uid="uid://duhnarvm8hla0"]
+
+[ext_resource type="Texture2D" uid="uid://bti300ydhup4b" path="res://Sprites/Blast/EnemyBlast.png" id="1_8a1c0"]
+[ext_resource type="Script" path="res://Scenes/enemy_bullet_scene.gd" id="1_d2yn2"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_ejlbk"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_8a1c0")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_vvvyn"]
+size = Vector2(6.4, 15.2)
+
+[node name="EnemyBulletScene" type="Node2D"]
+scale = Vector2(2.5, 2.5)
+script = ExtResource("1_d2yn2")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_ejlbk")
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_layer = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(2.14577e-07, 0.399999)
+scale = Vector2(1, 1)
+shape = SubResource("RectangleShape2D_vvvyn")
+
+[connection signal="area_entered" from="Area2D" to="." method="_on_area_entered"]

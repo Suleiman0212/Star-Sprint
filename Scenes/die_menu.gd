@@ -4,7 +4,7 @@ extends Control
 
 @export var game_scene: String
 
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	if Input.is_action_just_pressed("ui_accept"):
 		_on_start_game_pressed()
 

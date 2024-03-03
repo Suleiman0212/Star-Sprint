@@ -3,8 +3,8 @@ extends Node
 @export var enemy_scene: PackedScene
 @onready var timer: Timer = $Timer
 
-var spawn_points = [176, 288, 400, 512, 624, 736, 848, 960, 1072, 1184, 1296, 1408, 1520, 1632, 1744]
-var busy_points = [false, false, false, false, false, false, false, false, false, false, false, false, false, false, false]
+var spawn_points = [176, 400, 624, 848, 1072, 1296, 1520, 1744]
+var busy_points = [false, false, false, false, false, false, false, false]
 
 var random
 func _ready() -> void:

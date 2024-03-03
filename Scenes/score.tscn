@@ -4,9 +4,11 @@
 
 [sub_resource type="SystemFont" id="SystemFont_etin6"]
 font_names = PackedStringArray("Classic Console Neue")
+subpixel_positioning = 0
 
 [sub_resource type="SystemFont" id="SystemFont_j7k06"]
 font_names = PackedStringArray("Classic Console Neue")
+subpixel_positioning = 0
 
 [node name="Score" type="CanvasLayer"]
 script = ExtResource("1_a72lq")

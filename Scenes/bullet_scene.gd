@@ -7,7 +7,7 @@ func _physics_process(delta: float) -> void:
  
 
 func _on_area_entered(area: Area2D) -> void:
-	if area.owner.name != "Player":
+	if area.owner.name != "Player" and area.owner.name != "EnemyBulletScene":
 		if area.owner.has_method("die"):
 			area.owner.die()
 		queue_free()

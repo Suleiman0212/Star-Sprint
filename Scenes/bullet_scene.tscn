@@ -15,16 +15,18 @@ animations = [{
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_1i3es"]
-size = Vector2(2, 7)
+size = Vector2(6, 15)
 
 [node name="BulletScene" type="Node2D"]
-scale = Vector2(7, 7)
+scale = Vector2(2.5, 2.5)
 script = ExtResource("1_8ufb0")
+SPEED = 1100.0
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_2bhvb")
 
 [node name="Area2D" type="Area2D" parent="."]
+collision_layer = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 position = Vector2(0, -0.5)
