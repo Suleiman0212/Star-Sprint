@@ -1,10 +1,11 @@
-[gd_scene load_steps=21 format=3 uid="uid://cxw6dc5wt24x4"]
+[gd_scene load_steps=31 format=3 uid="uid://cxw6dc5wt24x4"]
 
 [ext_resource type="Texture2D" uid="uid://fxblax4orlt8" path="res://Sprites/Player/Player.png" id="1_8t5jy"]
 [ext_resource type="Script" path="res://Scenes/player.gd" id="1_ileqs"]
 [ext_resource type="PackedScene" uid="uid://begh314braqn8" path="res://Scenes/bullet_scene.tscn" id="2_xx8t3"]
 [ext_resource type="Texture2D" uid="uid://kolg2ly5hk3j" path="res://Sprites/Player/Die-Sheet.png" id="3_d1k8n"]
 [ext_resource type="Texture2D" uid="uid://dvsti24i3ru3c" path="res://Sprites/Player/PlayerIdle-Sheet.png" id="3_eorih"]
+[ext_resource type="Texture2D" uid="uid://d2rkr4ay42bcd" path="res://Sprites/Player/Hurt-Sheet.png" id="4_bj2up"]
 [ext_resource type="Texture2D" uid="uid://duudg58gqtxo7" path="res://Sprites/Player/PlayerMoveL-Sheet.png" id="4_fc4ar"]
 [ext_resource type="Texture2D" uid="uid://dpc0kvegakgjb" path="res://Sprites/Player/PlayerMoveR-Sheet.png" id="5_wjnjw"]
 
@@ -30,6 +31,42 @@ region = Rect2(48, 0, 16, 16)
 [sub_resource type="AtlasTexture" id="AtlasTexture_n6acj"]
 atlas = ExtResource("3_d1k8n")
 region = Rect2(64, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0fals"]
+atlas = ExtResource("4_bj2up")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xyuwn"]
+atlas = ExtResource("4_bj2up")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2ejm6"]
+atlas = ExtResource("4_bj2up")
+region = Rect2(32, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_thhsr"]
+atlas = ExtResource("4_bj2up")
+region = Rect2(48, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fxg6y"]
+atlas = ExtResource("4_bj2up")
+region = Rect2(64, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_d0ekb"]
+atlas = ExtResource("4_bj2up")
+region = Rect2(80, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_iey8b"]
+atlas = ExtResource("4_bj2up")
+region = Rect2(96, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2j28n"]
+atlas = ExtResource("4_bj2up")
+region = Rect2(112, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_s5062"]
+atlas = ExtResource("4_bj2up")
+region = Rect2(128, 0, 16, 16)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_tigbw"]
 atlas = ExtResource("3_eorih")
@@ -76,6 +113,38 @@ animations = [{
 "loop": false,
 "name": &"Die",
 "speed": 17.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0fals")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xyuwn")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2ejm6")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_thhsr")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fxg6y")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_d0ekb")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_iey8b")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2j28n")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_s5062")
+}],
+"loop": true,
+"name": &"Hurt",
+"speed": 10.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -143,10 +212,10 @@ position = Vector2(0, -10.4)
 wait_time = 0.5
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
-scale = Vector2(1, 1)
 sprite_frames = SubResource("SpriteFrames_ud2w2")
-animation = &"Idle"
-frame_progress = 0.313075
+animation = &"Hurt"
+frame = 6
+frame_progress = 0.667468
 
 [node name="Hitbox" type="Area2D" parent="."]
 
@@ -154,4 +223,3 @@ frame_progress = 0.313075
 polygon = PackedVector2Array(0, 7.2, 2.4, 7.2, 2.4, 6.4, 3.2, 6.4, 3.2, 5.6, 4, 5.6, 4, 1.6, 6.4, 1.6, 6.4, 0, 7.2, 0, 7.2, -0.8, 6.4, -0.8, 6.4, -1.6, 4, -1.6, 4, -3.2, 3.2, -3.2, 3.2, -4, 2.4, -4, 2.4, -7.2, 1.6, -7.2, 1.6, -8, -0.8, -8, -0.8, -7.2, -2.4, -7.2, -2.4, -4, -4, -4, -4, -2.4, -5.6, -2.4, -6.4, -2.4, -6.4, -1.6, -7.2, -1.6, -7.2, 0.8, -6.4, 0.8, -6.4, 1.6, -4, 1.6, -4, 5.6, -3.2, 5.6, -3.2, 6.4, -2.4, 6.4, -2.4, 7.2)
 
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
-[connection signal="animation_finished" from="AnimatedSprite2D" to="." method="_on_animation_finished"]

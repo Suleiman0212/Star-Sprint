@@ -54,7 +54,6 @@ func die():
 			anim.play("DieV1")
 		2:
 			anim.play("DieV2")
-	
 
 
 func _on_animation_finished() -> void:

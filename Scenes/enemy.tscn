@@ -130,18 +130,15 @@ bullet_scene = ExtResource("2_x6bq8")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(-0.4, -0.4)
-scale = Vector2(1, 1)
 shape = SubResource("RectangleShape2D_l6abp")
 
 [node name="EnemyHitbox" type="Area2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="EnemyHitbox"]
 position = Vector2(-0.3, -0.3)
-scale = Vector2(1, 1)
 shape = SubResource("RectangleShape2D_ll6ys")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
-scale = Vector2(1, 1)
 sprite_frames = SubResource("SpriteFrames_dh6ki")
 animation = &"EnemyV3"
 

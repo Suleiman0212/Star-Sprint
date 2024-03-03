@@ -43,11 +43,6 @@ ui_accept={
 ]
 }
 
-[physics]
-
-common/physics_ticks_per_second=480
-common/max_physics_steps_per_frame=32
-
 [rendering]
 
 textures/canvas_textures/default_texture_filter=0
