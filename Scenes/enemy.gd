@@ -2,14 +2,19 @@ extends CharacterBody2D
 
 @onready var anim: AnimatedSprite2D = $AnimatedSprite2D
 @onready var marker: Marker2D = $Marker2D
-@onready var timer: Timer = $Timer
+@onready var timer: Timer = $ShootTimer
+@onready var state_timer: Timer = $StateTimer
+
 
 @export var bullet_scene: PackedScene
 @export var repair_kit: PackedScene
-@export var SPEED = 100.0
+@export var amunitions: PackedScene
+@export var SPEED = 35.0
+@export var SHOOT_RESCHARGE = [4, 5]
 var random
 var enemy_type
 var die_type
+var game_state
 
 func _ready() -> void:
 	random = RandomNumberGenerator.new()
@@ -37,14 +42,33 @@ func _physics_process(_delta: float) -> void:
 			queue_free()
 		queue_free()
 	move_and_slide()
-	
+
+func _state_changer():
+	if get_tree().root.has_node("Map/EnemySpawner"):
+		var enemy_spawner = get_tree().root.get_node("Map/EnemySpawner")
+		game_state = enemy_spawner.current_state
+		match game_state:
+			enemy_spawner.GameState.Easy:
+				SPEED = 65
+				SHOOT_RESCHARGE = [4, 5]
+			enemy_spawner.GameState.Normal:
+				SPEED = 70
+				SHOOT_RESCHARGE = [3, 4]
+			enemy_spawner.GameState.Hard:
+				SPEED = 75
+				SHOOT_RESCHARGE = [2, 3]
+			enemy_spawner.GameState.Impossible:
+				SPEED = 100
+				SHOOT_RESCHARGE = [1, 3]
+	else:
+		print("EROR GET STATE!")
+		game_state = 0
+
 func shoot():
 	var bullet = bullet_scene.instantiate()
 	get_tree().root.add_child(bullet)
 	bullet.position = marker.global_position
-	timer.start(random.randf_range(1, 3))
-
-
+	timer.start(random.randf_range(SHOOT_RESCHARGE[0], SHOOT_RESCHARGE[1]))
  
 func die():
 	var score = get_tree().root.get_node("Map/Score")
@@ -59,11 +83,21 @@ func die():
 
 func _on_animation_finished() -> void:
 	if random.randi_range(1, 20) == random.randi_range(1, 20):
-		var rep_kit = repair_kit.instantiate()
-		get_tree().root.add_child(rep_kit)
-		rep_kit.position = global_position
+		match random.randi_range(1, 2):
+			1:
+				var rep_kit = repair_kit.instantiate()
+				get_tree().root.add_child(rep_kit)
+				rep_kit.position = global_position
+			2:
+				var amunition = amunitions.instantiate()
+				get_tree().root.add_child(amunition)
+				amunition.position = global_position
 	queue_free()
 
 
 func _on_timer_timeout() -> void:
 	shoot()
+
+func _on_state_timer_timeout() -> void:
+	_state_changer()
+	state_timer.start()

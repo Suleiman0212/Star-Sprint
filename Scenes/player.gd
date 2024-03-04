@@ -6,6 +6,7 @@ extends CharacterBody2D
 @onready var score = get_tree().root.get_node("Map/Score")
 
 @export var SPEED = 800.0
+@export var ATTACK_SPEED: float = 0.5
 @export var bullet_scene: PackedScene
 @export var die_scene: String
 @export var LIVES: int = 3
@@ -37,7 +38,10 @@ func _physics_process(_delta: float) -> void:
 			if !gun_reload:
 				shoot()
 				gun_reload = true
-				timer.start()
+				if score.attack_accelerated:
+					timer.start(ATTACK_SPEED/2)
+				else:
+					timer.start(ATTACK_SPEED)
 		
 		global_position = global_position.clamp(Vector2(60, 0), Vector2(get_viewport_rect().size.x - 60, get_viewport_rect().size.y))
 		move_and_slide()
@@ -94,6 +98,9 @@ func health():
 	if LIVES < 3:
 		LIVES += 1
 		score.lives_update(LIVES)
+		
+func speed_up_attack():
+	score.remainder()
 
 func die():
 	change_state(PlayerStates.Die)
