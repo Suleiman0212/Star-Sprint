@@ -3,6 +3,10 @@ extends Node2D
 @export var SPEED = 900.0
 
 func _physics_process(delta: float) -> void:
+	if !get_tree().root.has_node("Map/Player"):
+		queue_free()
+	if position.y < -100:
+			queue_free()
 	global_position.y += -SPEED * delta
  
 

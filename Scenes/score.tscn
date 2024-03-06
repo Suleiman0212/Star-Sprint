@@ -1,4 +1,4 @@
-[gd_scene load_steps=4 format=3 uid="uid://bq0om0c7cajw3"]
+[gd_scene load_steps=7 format=3 uid="uid://bq0om0c7cajw3"]
 
 [ext_resource type="Script" path="res://Scenes/score.gd" id="1_a72lq"]
 
@@ -9,6 +9,16 @@ subpixel_positioning = 0
 [sub_resource type="SystemFont" id="SystemFont_j7k06"]
 font_names = PackedStringArray("Classic Console Neue")
 subpixel_positioning = 0
+
+[sub_resource type="SystemFont" id="SystemFont_qmva8"]
+font_names = PackedStringArray("Classic Console Neue")
+subpixel_positioning = 0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_uhw4g"]
+bg_color = Color(0.172549, 0, 0.0117647, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_p3hy5"]
+bg_color = Color(0.988235, 0, 0.133333, 1)
 
 [node name="Score" type="CanvasLayer"]
 script = ExtResource("1_a72lq")
@@ -29,6 +39,22 @@ theme_override_fonts/font = SubResource("SystemFont_j7k06")
 theme_override_font_sizes/font_size = 50
 text = "Time:"
 
-[node name="Timer" type="Timer" parent="VBoxContainer"]
+[node name="Lives" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = SubResource("SystemFont_j7k06")
+theme_override_font_sizes/font_size = 50
+text = "Lives:"
 
-[connection signal="timeout" from="VBoxContainer/Timer" to="." method="_on_timer_timeout"]
+[node name="RemainBar" type="ProgressBar" parent="VBoxContainer"]
+visible = false
+layout_mode = 2
+theme_override_fonts/font = SubResource("SystemFont_qmva8")
+theme_override_font_sizes/font_size = 25
+theme_override_styles/background = SubResource("StyleBoxFlat_uhw4g")
+theme_override_styles/fill = SubResource("StyleBoxFlat_p3hy5")
+max_value = 30.0
+step = 1.0
+
+[node name="ElepsedTime" type="Timer" parent="."]
+
+[connection signal="timeout" from="ElepsedTime" to="." method="_on_timer_timeout"]

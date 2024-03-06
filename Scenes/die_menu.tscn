@@ -2,12 +2,8 @@
 
 [ext_resource type="Script" path="res://Scenes/die_menu.gd" id="1_1pnlv"]
 [ext_resource type="Texture2D" uid="uid://b0l56smwluwnb" path="res://Sprites/Background/Background.png" id="1_k3o0w"]
-
-[sub_resource type="SystemFont" id="SystemFont_h8xhi"]
-font_names = PackedStringArray("Classic Console Neue")
-
-[sub_resource type="SystemFont" id="SystemFont_ofix3"]
-font_names = PackedStringArray("Classic Console Neue")
+[ext_resource type="AudioStream" uid="uid://s5usfq34mhfx" path="res://Sprites/Audio/select.ogg" id="3_v0h18"]
+[ext_resource type="FontFile" uid="uid://dyn3yp6ol6py" path="res://Sprites/Font/clacon2.ttf" id="3_xu14x"]
 
 [node name="DieMenu" type="Control"]
 layout_mode = 3
@@ -17,7 +13,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_1pnlv")
-game_scene = "res://Scenes/map.tscn"
+menu_scene = "res://Scenes/main_menu.tscn"
 
 [node name="Background" type="TextureRect" parent="."]
 layout_mode = 1
@@ -51,16 +47,19 @@ size_flags_vertical = 4
 
 [node name="Label" type="Label" parent="MarginContainer/HBoxContainer/VBoxContainer"]
 layout_mode = 2
-theme_override_fonts/font = SubResource("SystemFont_h8xhi")
+theme_override_fonts/font = ExtResource("3_xu14x")
 theme_override_font_sizes/font_size = 125
 text = "You die"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="StartGame" type="Button" parent="MarginContainer/HBoxContainer/VBoxContainer"]
+[node name="MainMenu" type="Button" parent="MarginContainer/HBoxContainer/VBoxContainer"]
 layout_mode = 2
-theme_override_fonts/font = SubResource("SystemFont_ofix3")
+theme_override_fonts/font = ExtResource("3_xu14x")
 theme_override_font_sizes/font_size = 125
-text = "Restart game"
+text = "Main menu"
 
-[connection signal="pressed" from="MarginContainer/HBoxContainer/VBoxContainer/StartGame" to="." method="_on_start_game_pressed"]
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_v0h18")
+
+[connection signal="pressed" from="MarginContainer/HBoxContainer/VBoxContainer/MainMenu" to="." method="_on_start_game_pressed"]

@@ -1,11 +1,13 @@
-[gd_scene load_steps=21 format=3 uid="uid://bv68ccbwb11gm"]
+[gd_scene load_steps=23 format=3 uid="uid://bv68ccbwb11gm"]
 
 [ext_resource type="Texture2D" uid="uid://dm5fjsaq1x30b" path="res://Sprites/Enemies/Enemy1.png" id="1_b4voc"]
 [ext_resource type="Script" path="res://Scenes/enemy.gd" id="1_kxdyi"]
 [ext_resource type="Texture2D" uid="uid://da34757jepat0" path="res://Sprites/Blast/Die1-Sheet.png" id="2_wmxbd"]
 [ext_resource type="PackedScene" uid="uid://duhnarvm8hla0" path="res://Scenes/enemy_bullet_scene.tscn" id="2_x6bq8"]
+[ext_resource type="PackedScene" uid="uid://bnni30we7u80u" path="res://Scenes/repair_kit.tscn" id="3_7qt7h"]
 [ext_resource type="Texture2D" uid="uid://c7cyemsc1c1n2" path="res://Sprites/Blast/Die2-Sheet.png" id="3_bxhia"]
 [ext_resource type="Texture2D" uid="uid://c31phxm7n6c6b" path="res://Sprites/Enemies/Enemy2.png" id="4_cjswa"]
+[ext_resource type="PackedScene" uid="uid://th2vgbmjab10" path="res://Scenes/amunitions.tscn" id="4_kb55m"]
 [ext_resource type="Texture2D" uid="uid://lt6e2p67ps4y" path="res://Sprites/Enemies/Enemy3.png" id="6_qbjsd"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_l6abp"]
@@ -127,29 +129,35 @@ collision_layer = 0
 collision_mask = 0
 script = ExtResource("1_kxdyi")
 bullet_scene = ExtResource("2_x6bq8")
+repair_kit = ExtResource("3_7qt7h")
+amunitions = ExtResource("4_kb55m")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(-0.4, -0.4)
-scale = Vector2(1, 1)
 shape = SubResource("RectangleShape2D_l6abp")
 
 [node name="EnemyHitbox" type="Area2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="EnemyHitbox"]
 position = Vector2(-0.3, -0.3)
-scale = Vector2(1, 1)
 shape = SubResource("RectangleShape2D_ll6ys")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
-scale = Vector2(1, 1)
 sprite_frames = SubResource("SpriteFrames_dh6ki")
 animation = &"EnemyV3"
 
 [node name="Marker2D" type="Marker2D" parent="."]
 position = Vector2(0, 9.6)
 
-[node name="Timer" type="Timer" parent="."]
+[node name="ShootTimer" type="Timer" parent="."]
 wait_time = 5.0
 
+[node name="StateTimer" type="Timer" parent="."]
+autostart = true
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+bus = &"Enemy"
+
 [connection signal="animation_finished" from="AnimatedSprite2D" to="." method="_on_animation_finished"]
-[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
+[connection signal="timeout" from="ShootTimer" to="." method="_on_timer_timeout"]
+[connection signal="timeout" from="StateTimer" to="." method="_on_state_timer_timeout"]
