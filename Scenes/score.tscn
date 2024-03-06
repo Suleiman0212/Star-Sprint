@@ -12,6 +12,7 @@ subpixel_positioning = 0
 
 [sub_resource type="SystemFont" id="SystemFont_qmva8"]
 font_names = PackedStringArray("Classic Console Neue")
+subpixel_positioning = 0
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_uhw4g"]
 bg_color = Color(0.172549, 0, 0.0117647, 1)

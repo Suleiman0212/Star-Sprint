@@ -3,6 +3,7 @@ extends CharacterBody2D
 @onready var anim: AnimatedSprite2D = $AnimatedSprite2D
 @onready var marker: Marker2D = $Marker2D
 @onready var timer: Timer = $Timer
+@onready var audio: AudioStreamPlayer = $AudioStreamPlayer
 @onready var score = get_tree().root.get_node("Map/Score")
 
 @export var SPEED = 800.0
@@ -10,6 +11,10 @@ extends CharacterBody2D
 @export var bullet_scene: PackedScene
 @export var die_scene: String
 @export var LIVES: int = 3
+
+var SHOOT_AUD := preload("res://Sprites/Audio/shoot.ogg")
+var DEATH_AUD := preload("res://Sprites/Audio/death.ogg")
+var HIT_AUD := preload("res://Sprites/Audio/hit.ogg")
 
 enum PlayerStates {
 	Idle,
@@ -24,6 +29,7 @@ var current_state: PlayerStates = PlayerStates.Idle
 var gun_reload = false
 
 func _ready() -> void:
+	audio.volume_db = GL.db()
 	anim.play("default")
 
 func _physics_process(_delta: float) -> void:
@@ -48,6 +54,8 @@ func _physics_process(_delta: float) -> void:
 	
 func _process(_delta: float) -> void:
 	_state_changer()
+	if Input.is_action_just_pressed("ui_menu"):
+		die()
 	
 func change_state(new_state: PlayerStates) -> void:
 	current_state = new_state
@@ -84,14 +92,18 @@ func shoot():
 	var bullet = bullet_scene.instantiate()
 	get_tree().root.add_child(bullet)
 	bullet.position = marker.global_position
+	audio.stream = SHOOT_AUD
+	audio.play()
 	
 func hurt():
 	if current_state != PlayerStates.Hurt:
 		LIVES -= 1
 		score.lives_update(LIVES)
 		if LIVES <= 0:
-			change_state(PlayerStates.Die)
+			die()
 		else:
+			audio.stream = HIT_AUD
+			audio.play()
 			change_state(PlayerStates.Hurt)
 			
 func health():
@@ -103,6 +115,9 @@ func speed_up_attack():
 	score.remainder()
 
 func die():
+	audio.stop()
+	audio.stream = DEATH_AUD
+	audio.play()
 	change_state(PlayerStates.Die)
 
 func _on_timer_timeout() -> void:

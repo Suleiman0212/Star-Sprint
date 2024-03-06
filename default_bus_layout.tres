@@ -1,0 +1,26 @@
+[gd_resource type="AudioBusLayout" load_steps=3 format=3 uid="uid://dhtqm1mcnlfi4"]
+
+[sub_resource type="AudioEffectPitchShift" id="AudioEffectPitchShift_ryrpj"]
+resource_name = "PitchShift"
+
+[sub_resource type="AudioEffectPitchShift" id="AudioEffectPitchShift_7j878"]
+resource_name = "PitchShift"
+
+[resource]
+bus/0/volume_db = -0.130497
+bus/1/name = &"Player"
+bus/1/solo = false
+bus/1/mute = false
+bus/1/bypass_fx = false
+bus/1/volume_db = -10.0692
+bus/1/send = &"Master"
+bus/1/effect/0/effect = SubResource("AudioEffectPitchShift_ryrpj")
+bus/1/effect/0/enabled = false
+bus/2/name = &"Enemy"
+bus/2/solo = false
+bus/2/mute = false
+bus/2/bypass_fx = false
+bus/2/volume_db = -13.5162
+bus/2/send = &"Master"
+bus/2/effect/0/effect = SubResource("AudioEffectPitchShift_7j878")
+bus/2/effect/0/enabled = true
