@@ -25,5 +25,5 @@ func db() -> float:
 	var min_db = -80.0
 	var max_db = 24.0
 	var db_range = max_db - min_db
-	var db = (volume / 100.0) * db_range + min_db
-	return db
+	var db_val = (volume / 100.0) * db_range + min_db
+	return db_val
